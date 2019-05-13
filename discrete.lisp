@@ -1,12 +1,8 @@
-(defun sum (l)
-  (if (consp l)
-      (+ (car l) (sum (cdr l)))
-      0))
-
 (defun product (l)
-  (if (consp l)
-      (* (car l) (product (cdr l)))
-      1))
+  (apply #'* l))
+
+(defun sum (l)
+  (apply #'+ l))
 
 (defun modular-exponent (x n m)
   (defun z () (modular-exponent (mod (* x x) m) (ash n (- 1)) m))
