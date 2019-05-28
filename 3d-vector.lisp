@@ -59,7 +59,7 @@
 (defmethod projection ((u 3d-vector) (v 3d-vector))
   (mul v (/ (dot u v) (expt (norm v) 2))))
 
-(defmethod make-unit ((u 3d-vector))
+(defmethod unit ((u 3d-vector))
   (with-slots (x y z) u
     (let ((n (norm u)))
       (make-instance
