@@ -15,7 +15,7 @@
       (make-instance
        'quaternion
        :real (- (* a b) (dot vq vp))
-       :imag (add (mul vq a) (add (mul vp a) (cross vq vp)))))))
+       :imag (add (mul vp a) (add (mul vq b) (cross vq vp)))))))
 
 (defmethod add ((q quaternion) (p quaternion))
   (with-slots ((a real) (vq imag)) q
