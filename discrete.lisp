@@ -52,11 +52,13 @@
 	((= i 0) f1)))
   
   (defun is-prime (n)
-    (and
+    (if (= n 1)
+	nil
+	(or
 					; fermat's little theorem
-     (= (modular-exponent 2 (- n 1) n) 1)
+	 (= (modular-exponent 2 (- n 1) n) 1)
 					; fibonacci test
-     (= (mod (fib (+ n 1)) n) 0)))
+	 (= (mod (fib (+ n 1)) n) 0))))
   
   (defun divides (d n)
     (= (mod n d) 0))
