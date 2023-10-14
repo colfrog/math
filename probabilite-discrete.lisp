@@ -7,7 +7,7 @@
   (/ (factorielle n) (factorielle (- n x))))
 
 (defun combinaisons (n x)
-  (/ (permutations n x) x))
+  (/ (permutations n x) (factorielle x)))
 
 (defun Bernoulli (p)
   ;; Bernouilli représente un choix binaire
@@ -100,8 +100,11 @@
      variance
      ecart-type)))
 
-(defun repartition (loi x-max &optional (depart 0) (pas 1))
+(defun repartition-discrete (loi x-max &optional (depart 0) (pas 1))
   (do* ((x depart (+ x pas))
 	(sum (funcall (car loi) x)
 	     (+ sum (funcall (car loi) x))))
        ((>= x x-max) sum)))
+
+(defun masse (loi x)
+  (funcall (car loi) x))
