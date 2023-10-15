@@ -16,7 +16,6 @@
 	   (do* ((x a (+ x dx))
 		 (y (funcall f x) (funcall f x)))
 		((<= y 0.0001) x))))
-    (print x-max)
     (approximation-integrale f a x-max dx)))
 
 (defun Uniforme (alpha beta)
