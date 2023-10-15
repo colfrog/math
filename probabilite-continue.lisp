@@ -71,9 +71,9 @@
 
   (let* ((fonction-gamma
 	   (lambda (alpha) (factorielle (- alpha 1))))
-	 (moyenne (/ 1 taux))
-	 (variance (/ 1 (expt taux 2)))
-	 (ecart-type moyenne))
+	 (moyenne (/ r taux))
+	 (variance (/ r (expt taux 2)))
+	 (ecart-type (sqrt variance)))
 
     (list
      ; Densité
@@ -88,15 +88,16 @@
      (lambda (x)
        (if (<= x 0)
 	   0
-	   (let ((repartition (lambda (k)
-				(/ (*
-				    (exp (* (- taux) x))
-				    (expt (* taux x) k))
-				   (factorielle k)))))
+	   (let ((somme-intégrée
+		   (lambda (k)
+		     (/ (*
+			 (exp (* (- taux) x))
+			 (expt (* taux x) k))
+			(factorielle k)))))
 	   (- 1
 	      (do* ((k 0 (1+ k))
-		    (sum (funcall repartition k)
-			 (+ sum (funcall repartition k))))
+		    (sum (funcall somme-intégrée k)
+			 (+ sum (funcall somme-intégrée k))))
 		   ((>= k (- r 1)) sum))))))
      moyenne
      variance
