@@ -20,7 +20,7 @@
     (approximation-integrale f a x-max dx)))
 
 (defun fonction-gamma (alpha)
-  (if (integerp alpha);(= alpha (round alpha))
+  (if (= alpha (round alpha))
       (factorielle (- alpha 1))
       (approximation-integrale-infinie
        (lambda (x) (* (expt x (- alpha 1)) (exp (- x))))
