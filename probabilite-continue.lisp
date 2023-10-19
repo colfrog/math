@@ -127,7 +127,7 @@
 		    (expt delta 2)
 		    (-
 		     (fonction-gamma (+ 1 (/ 2 beta)))
-		     (sqrt (fonction-gamma (+ 1 (/ 1 beta)))))))
+		     (expt (fonction-gamma (+ 1 (/ 1 beta))) 2))))
 	 (ecart-type (sqrt variance)))
  
     (list
