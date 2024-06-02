@@ -1,3 +1,5 @@
+(in-package :clf-math)
+
 (defun factorielle (n)
   (cond
     ((<= n 1) 1)

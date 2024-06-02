@@ -1,4 +1,4 @@
-(load "discrete.lisp")
+(in-package :clf-math)
 
 (defun get-prime-pair (n)
     (let ((pair (factorial-wheel n)))

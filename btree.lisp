@@ -1,3 +1,5 @@
+(in-package :clf-math)
+
 (defun make-tree (value &optional (node1 nil) (node2 nil))
   (cons
    value

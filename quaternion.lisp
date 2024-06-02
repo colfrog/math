@@ -1,4 +1,4 @@
-(load "3d-vector.lisp")
+(in-package :clf-math)
 
 (defclass quaternion ()
   ((real :initarg :real :initform 0)

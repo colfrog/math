@@ -1,3 +1,5 @@
+(in-package :clf-math)
+
 (defun product (l)
   "Multiplies a list of numbers together"
   (apply #'* l))
@@ -46,10 +48,10 @@
   "Returns the prime factors composing n"
   
   (defun fib (n)
-    (do ((i n (1- i))
-	 (f1 0 f2)
-	 (f2 1 (+ f1 f2)))
-	((= i 0) f1)))
+    (let ((phi (/ (+ 1 (sqrt 5)) 2)))
+      (* (/ 1 (sqrt 5))
+	 (- (expt (/ (+ 1 (sqrt 5)) 2) n)
+	    (expt (/ (- 1 (sqrt 5)) 2) n)))))
   
   (defun is-prime (n)
     (if (= n 1)

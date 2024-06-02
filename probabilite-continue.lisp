@@ -1,4 +1,4 @@
-(load "probabilite-discrete.lisp")
+(in-package :clf-math)
 
 (defun approximation-integrale (f a b dx)
   (do* ((x1 a (+ x1 dx))

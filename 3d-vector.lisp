@@ -1,3 +1,5 @@
+(in-package :clf-math)
+
 (defclass 3d-vector ()
   ((x :initarg :x :initform 0)
    (y :initarg :y :initform 0)
@@ -67,3 +69,4 @@
        :x (/ x n)
        :y (/ y n)
        :z (/ z n)))))
+
