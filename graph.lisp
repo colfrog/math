@@ -9,7 +9,7 @@
 	   (a (make-array new-length)))
       (dotimes (i (length data))
 	(setf (aref a i) (aref data i)))
-      (setf (aref a new-length) arcs)
+      (setf (aref a (1- new-length)) arcs)
       (setf data a))))
 
 (defmethod add-arc ((g graph) (index number) (target number))
