@@ -29,3 +29,6 @@
       (when (null data)
 	(setf last nil))
       elem)))
+
+(defmethod print-object ((q queue) stream)
+  (print (slot-value q 'data) stream))

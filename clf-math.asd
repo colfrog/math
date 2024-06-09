@@ -12,5 +12,6 @@
 	       (:file "stack")
 	       (:file "queue")
 	       (:file "btree")
+	       (:file "graph")
 	       (:file "probabilite-discrete")
 	       (:file "probabilite-continue")))
