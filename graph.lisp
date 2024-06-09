@@ -27,15 +27,20 @@
     invg))
 
 (defmethod explore ((g graph) (node number) (stack stack)
-		    (visited array) (start array) (end array) (clock number))
+		    (visited array) &key start end clock)
   (with-slots (data) g
     (setf (aref visited node) t)
-    (setf (aref start node) clock)
+    (when (and (not (null start)) (not (null clock)))
+      (setf (aref start node) clock))
     (dolist (adj-node (aref data node))
       (when (not (aref visited adj-node))
-	(setf clock (explore g adj-node stack visited start end (1+ clock)))))
-    (setf clock (1+ clock))
-    (setf (aref end node) clock)
+	(setf clock (explore g adj-node stack visited
+			     :start start :end end :clock (when (not (null clock))
+							    (1+ clock))))))
+    (when (not (null clock))
+      (setf clock (1+ clock)))
+    (when (and (not (null end)) (not (null clock)))
+      (setf (aref end node) clock))
     (push-stack stack node)
     clock))
 
@@ -49,8 +54,24 @@
 	   (end (make-array size :element-type 'number :initial-element -1)))
       (dotimes (i size)
 	(when (not (aref visited i))
-	  (setf clock (1+ (explore g i stack visited start end clock)))))
+	  (setf clock (1+ (explore g i stack visited
+				   :start start :end end :clock clock)))))
       (list stack start end))))
+
+(defmethod kosaraju ((g graph))
+  (with-slots (data) g
+    (let* ((size (length data))
+	   (stacks nil)
+	   (visited (make-array size :initial-element nil))
+	   (invg (inverted-graph g))
+	   (invg-stack (car (in-depth invg))))
+      (do ((node (pop-stack invg-stack) (pop-stack invg-stack))
+	   (stack (make-instance 'stack) (make-instance 'stack)))
+	  ((null (slot-value invg-stack 'data)) nil)
+	(when (not (aref visited node))
+	  (explore g node stack visited)
+	  (push stack stacks)))
+      stacks)))
 
 (defmethod print-object ((g graph) stream)
   (print (slot-value g 'data) stream))
