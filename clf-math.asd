@@ -13,6 +13,7 @@
 	       (:file "queue")
 	       (:file "btree")
 	       (:file "graph")
+	       (:file "disp-table")
 	       (:file "weighted-graph")
 	       (:file "probabilite-discrete")
 	       (:file "probabilite-continue")))

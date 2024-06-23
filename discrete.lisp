@@ -98,6 +98,10 @@
       (when (divides i n)
 	(setf prime nil)))))
 
+(defun next-prime (n)
+  (do ((i n (1+ i)))
+      ((is-prime i) i)))
+
 (defun factorial-wheel (n)
   "Returns the prime factors composing n"
   
