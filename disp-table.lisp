@@ -1,11 +1,12 @@
 (in-package :clf-math)
 
+(defparameter *disp-table-initial-size* 7)
 (defclass disp-table ()
-  ((data :initform (make-array 8 :initial-element nil))
-   (keys :initform (make-array 8 :initial-element nil))
-   (flags :initform (make-array 8 :initial-element nil))
+  ((data :initform (make-array *disp-table-initial-size* :initial-element nil))
+   (keys :initform (make-array *disp-table-initial-size* :initial-element nil))
+   (flags :initform (make-array *disp-table-initial-size* :initial-element nil))
    (n :initform 0)
-   (size :initform 8)
+   (size :initform *disp-table-initial-size*)
    (hash :initform
 	 (lambda (key)
 	   (let ((sum 1)
@@ -14,8 +15,8 @@
 	       (setf sum (+ (* c sum) (char-int (aref key i)))))
 	     sum)))))
 
-(defvar *disp-table-occupied* 1)
-(defvar *disp-table-deleted* -1)
+(defparameter *disp-table-occupied* 1)
+(defparameter *disp-table-deleted* -1)
 
 (defmethod set-hash-function-disp-table ((tab disp-table) f)
   (setf (slot-value tab 'hash) f)
