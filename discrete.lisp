@@ -100,7 +100,7 @@
 
 (defun next-prime (n)
   (do ((i n (1+ i)))
-      ((is-prime i) i)))
+      ((is-prime-iter i) i)))
 
 (defun factorial-wheel (n)
   "Returns the prime factors composing n"

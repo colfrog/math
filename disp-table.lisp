@@ -1,7 +1,9 @@
+(in-package :clf-math)
+
 (defclass disp-table ()
-  ((data :initform (make-array 8))
-   (keys :initform (make-array 8))
-   (flags :initform (make-array 8))
+  ((data :initform (make-array 8 :initial-element nil))
+   (keys :initform (make-array 8 :initial-element nil))
+   (flags :initform (make-array 8 :initial-element nil))
    (n :initform 0)
    (size :initform 8)
    (hash :initform
@@ -9,7 +11,8 @@
 	   (let ((sum 1)
 		 (c 37))
 	     (dotimes (i (length key))
-	       (setf sum (+ (* 37 sum) (aref key i)))))))))
+	       (setf sum (+ (* c sum) (char-int (aref key i)))))
+	     sum)))))
 
 (defvar *disp-table-occupied* 1)
 (defvar *disp-table-deleted* -1)
@@ -25,17 +28,17 @@
 	   (old-keys keys)
 	   (old-data data))
       (setf size new-size)
-      (setf data (make-array new-size))
-      (setf keys (make-array new-size))
-      (setf flags (make-array size))
+      (setf data (make-array new-size :initial-element nil))
+      (setf keys (make-array new-size :initial-element nil))
+      (setf flags (make-array size :initial-element nil))
       (dotimes (i size)
 	(when (= (aref old-flags i) *disp-table-occupied*)
-	  (insert-disp-table tab (aref old-keys i) (aref old-data i)))))))
+	  (set-disp-table tab (aref old-keys i) (aref old-data i)))))))
 
 (defmethod index-dist-table ((tab disp-table) key)
-  (with-slots (hash flags size) tab
+  (with-slots (hash keys flags size) tab
     (do ((offset 1 (+ offset 2))
-	 (current (hash key) (mod (+ current offset) size)))
+	 (current (mod (funcall hash key) size) (mod (+ current offset) size)))
 	((or (null (aref flags current)) (equal (aref keys current) key))
 	 current))))
 
@@ -61,4 +64,4 @@
   (with-slots (data flags) tab
     (let ((index (index-dist-table tab key)))
       (when (eq (aref flags index) *disp-table-occupied*)
-	(aref data tab)))))
+	(aref data index)))))
