@@ -87,16 +87,16 @@
      ;; fibonacci test
      (= (mod (fib (+ n 1)) n) 0))))
 
+(defun divides (d n)
+  (= (mod n d) 0))
+
 (defun is-prime-iter (n)
   (when (> n 1)
     (do ((i 2 (1+ i))
 	 (prime t prime))
 	((or (not prime) (= i (floor (sqrt n)))) prime)
-      (when (= (mod n i) 0)
+      (when (divides i n)
 	(setf prime nil)))))
-
-(defun divides (d n)
-  (= (mod n d) 0))
 
 (defun factorial-wheel (n)
   "Returns the prime factors composing n"
