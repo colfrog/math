@@ -41,3 +41,12 @@
   (with-slots (data size) a
     (setf size (1- size))
     (aref data size)))
+
+(defmethod print-object ((a dyn-array) stream)
+  (with-slots (data size) a
+    (format stream "#DA(")
+    (dotimes (i size)
+      (print-object (aref data i) stream)
+      (when (< i (1- size))
+	(format stream " ")))
+    (format stream ")")))
