@@ -5,6 +5,7 @@
   :license "bsd-2-clause"
   :description "Personal math library made with love for fun"
   :components ((:file "package")
+	       (:file "sort")
 	       (:file "3d-vector")
 	       (:file "quaternion")
 	       (:file "discrete")
