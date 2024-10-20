@@ -13,6 +13,7 @@
 	       (:file "stack")
 	       (:file "queue")
 	       (:file "sort")
+	       (:file "search")
 	       (:file "heap")
 	       (:file "btree")
 	       (:file "graph")
